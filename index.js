@@ -1,13 +1,12 @@
 const express = require('express');
- const app = express();
+const helmet = require("helmet");
+const app = express();
 
-app.get('/', function (req,res) {
-    res.send('Test')
-})
+const usersRoute = require('./Router/Users');
+const groupsRoute = require('./Router/Groups');
 
-const usersRouter = require('Router/Users.js');
-const groupsRouter = require('Router/Groups.js');
+app.use('/users', usersRoute);
+app.use('/groups', groupsRoute);
+app.use(helmet());
 
-app.use('/users',usersRouter);
-app.use('/groups',groupsRouter);
 app.listen(3000);
